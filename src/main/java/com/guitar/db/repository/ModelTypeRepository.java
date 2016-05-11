@@ -8,14 +8,16 @@ import org.springframework.stereotype.Repository;
 import com.guitar.db.model.ModelType;
 
 @Repository
-public class ModelTypeRepository {
+public class ModelTypeRepository
+{
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	/**
 	 * Create
 	 */
-	public ModelType create(ModelType mt) {
+	public ModelType create(ModelType mt)
+	{
 		entityManager.persist(mt);
 		entityManager.flush();
 		return mt;
@@ -24,7 +26,8 @@ public class ModelTypeRepository {
 	/**
 	 * Update
 	 */
-	public ModelType update(ModelType mt) {
+	public ModelType update(ModelType mt)
+	{
 		mt = entityManager.merge(mt);
 		entityManager.flush();
 		return mt;
@@ -33,7 +36,8 @@ public class ModelTypeRepository {
 	/**
 	 * Delete
 	 */
-	public void delete(ModelType mt) {
+	public void delete(ModelType mt)
+	{
 		entityManager.remove(mt);
 		entityManager.flush();
 	}
@@ -41,7 +45,8 @@ public class ModelTypeRepository {
 	/**
 	 * Find
 	 */
-	public ModelType find(Long id) {
+	public ModelType find(Long id)
+	{
 		return entityManager.find(ModelType.class, id);
 	}
 }
