@@ -8,69 +8,78 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.guitar.db.model.Model;
 
 @Repository
-public class ModelRepository {
+public class ModelRepository
+{
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Autowired
+	private ModelJpaRepository modelJpaRepository;
+	
 	/**
 	 * Create
 	 */
-	public Model create(Model mod) {
-		entityManager.persist(mod);
-		entityManager.flush();
-		return mod;
+	public Model create(Model mod)
+	{
+		return modelJpaRepository.save(mod);
 	}
 
 	/**
 	 * Update
 	 */
-	public Model update(Model mod) {
-		mod = entityManager.merge(mod);
-		entityManager.flush();
-		return mod;
+	public Model update(Model mod)
+	{
+		return modelJpaRepository.save(mod);
 	}
 
 	/**
 	 * Delete
 	 */
-	public void delete(Model mod) {
-		entityManager.remove(mod);
-		entityManager.flush();
+	public void delete(Model mod)
+	{
+		modelJpaRepository.delete(mod);
 	}
 
 	/**
 	 * Find
 	 */
-	public Model find(Long id) {
-		return entityManager.find(Model.class, id);
+	public Model find(Long id)
+	{
+		return modelJpaRepository.findOne(id);
 	}
 
 	/**
 	 * Custom finder
 	 */
-	public List<Model> getModelsInPriceRange(BigDecimal lowest, BigDecimal highest) {
+	public List<Model> getModelsInPriceRange(BigDecimal lowest,
+			BigDecimal highest)
+	{
 		@SuppressWarnings("unchecked")
 		List<Model> mods = entityManager
-				.createQuery("select m from Model m where m.price >= :lowest and m.price <= :highest")
-				.setParameter("lowest", lowest)
-				.setParameter("highest", highest).getResultList();
+				.createQuery(
+						"select m from Model m where m.price >= :lowest and m.price <= :highest")
+				.setParameter("lowest", lowest).setParameter("highest", highest)
+				.getResultList();
 		return mods;
 	}
 
 	/**
 	 * Custom finder
 	 */
-	public List<Model> getModelsByPriceRangeAndWoodType(BigDecimal lowest, BigDecimal highest, String wood) {
+	public List<Model> getModelsByPriceRangeAndWoodType(BigDecimal lowest,
+			BigDecimal highest, String wood)
+	{
 		@SuppressWarnings("unchecked")
 		List<Model> mods = entityManager
-				.createQuery("select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType like :wood")
-				.setParameter("lowest", lowest)
-				.setParameter("highest", highest)
+				.createQuery(
+						"select m from Model m where m.price >= :lowest and m.price <= :highest and m.woodType like :wood")
+				.setParameter("lowest", lowest).setParameter("highest", highest)
 				.setParameter("wood", "%" + wood + "%").getResultList();
 		return mods;
 	}
@@ -78,7 +87,8 @@ public class ModelRepository {
 	/**
 	 * NamedQuery finder
 	 */
-	public List<Model> getModelsByType(String modelType) {
+	public List<Model> getModelsByType(String modelType)
+	{
 		@SuppressWarnings("unchecked")
 		List<Model> mods = entityManager
 				.createNamedQuery("Model.findAllModelsByType")
@@ -89,7 +99,8 @@ public class ModelRepository {
 	/**
 	 * Count
 	 */
-	public Long getModelCount() {
+	public Long getModelCount()
+	{
 		CriteriaBuilder qb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Long> cq = qb.createQuery(Long.class);
 		cq.select(qb.count(cq.from(Model.class)));
