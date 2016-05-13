@@ -12,7 +12,9 @@ public interface LocationJpaRepository extends JpaRepository<Location, Long>
 {
 	List<Location> findByStateLike(String stateName);
 	
-	List<Location> findByStateOrCountry(String stateName, String country);
+	List<Location> findByStateIsOrCountryEquals(String stateName, String country);
 	
-	List<Location> findByStateAndCountry(String stateName, String country);
+	List<Location> findByStateNot(String state);
+	
+	
 }
