@@ -10,7 +10,13 @@ import com.guitar.db.model.Location;
 @Repository
 public interface LocationJpaRepository extends JpaRepository<Location, Long>
 {
+	List<Location> findByStateIgnoreCaseStartingWith(String stateName);
+	
+	Location findFirstByStateIgnoreCaseStartingWith(String stateName);
+	
 	List<Location> findByStateLike(String stateName);
+	
+	List<Location> findByStateNotLikeOrderByStateAsc(String state);
 	
 	List<Location> findByStateIsOrCountryEquals(String stateName, String country);
 	
