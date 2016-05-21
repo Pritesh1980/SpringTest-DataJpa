@@ -20,7 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.guitar.db.model.ModelType;
 import com.guitar.db.repository.ModelTypeJpaRepository;
 
-@ContextConfiguration(locations ={ "classpath:com/guitar/db/applicationTests-context.xml" })
+@ContextConfiguration(locations =
+{ "classpath:com/guitar/db/applicationTests-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ModelTypePersistenceTests
 {
@@ -28,9 +29,11 @@ public class ModelTypePersistenceTests
 	private ModelTypeJpaRepository modelTypeJpaRepository;
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager		   entityManager;
 
-	@Lock(LockModeType.PESSIMISTIC_WRITE) // These need to be in a transaction and need a @Version in the entity. Just doing it here to check syntax
+	@Lock(LockModeType.PESSIMISTIC_WRITE) // These need to be in a transaction
+										  // and need a @Version in the entity.
+										  // Just doing it here to check syntax
 	@Test
 	@Transactional
 	public void testSaveAndGetAndDelete() throws Exception
@@ -62,7 +65,7 @@ public class ModelTypePersistenceTests
 	public void testForNull() throws Exception
 	{
 		List<ModelType> mt = modelTypeJpaRepository.findByNameIsNull();
-		assertNull( mt.get(0).getName());
+		assertNull(mt.get(0).getName());
 	}
 
 }

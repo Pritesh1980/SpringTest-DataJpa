@@ -16,55 +16,61 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-@NamedNativeQuery(name = "Manufacturer.getAllThatSellAcoustics", 
-		query = "SELECT m.id, m.name, m.foundedDate, m.averageYearlySales, m.location_id as headquarters_id, m.active "
-	    + "FROM Manufacturer m "
+@NamedNativeQuery(name = "Manufacturer.getAllThatSellAcoustics", query = "SELECT m.id, m.name, m.foundedDate, m.averageYearlySales, m.location_id as headquarters_id, m.active "
+		+ "FROM Manufacturer m "
 		+ "LEFT JOIN Model mod ON (m.id = mod.manufacturer_id) "
 		+ "LEFT JOIN ModelType mt ON (mt.id = mod.modeltype_id) "
-	    + "WHERE (mt.name = ?)", resultClass = Manufacturer.class)
-public class Manufacturer {
+		+ "WHERE (mt.name = ?)", resultClass = Manufacturer.class)
+public class Manufacturer
+{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long		id;
 
-	private String name;
-	private Date foundedDate;
-	private BigDecimal averageYearlySales;
-	private Boolean active;
-	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="MANUFACTURER_ID")
-	private List<Model> models = new ArrayList<Model>();
+	private String		name;
+	private Date		foundedDate;
+	private BigDecimal	averageYearlySales;
+	private Boolean		active;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "MANUFACTURER_ID")
+	private List<Model>	models = new ArrayList<Model>();
 
 	@ManyToOne
-	private Location headquarters;
+	private Location	headquarters;
 
 	public final Boolean getActive()
 	{
 		return active;
 	}
 
-	public BigDecimal getAverageYearlySales() {
+	public BigDecimal getAverageYearlySales()
+	{
 		return averageYearlySales;
 	}
 
-	public Date getFoundedDate() {
+	public Date getFoundedDate()
+	{
 		return foundedDate;
 	}
 
-	public Location getHeadquarters() {
+	public Location getHeadquarters()
+	{
 		return headquarters;
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return id;
 	}
 
-	public List<Model> getModels() {
+	public List<Model> getModels()
+	{
 		return models;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
@@ -73,23 +79,28 @@ public class Manufacturer {
 		this.active = active;
 	}
 
-	public void setAverageYearlySales(BigDecimal averageYearlySales) {
+	public void setAverageYearlySales(BigDecimal averageYearlySales)
+	{
 		this.averageYearlySales = averageYearlySales;
 	}
 
-	public void setFoundedDate(Date foundedDate) {
+	public void setFoundedDate(Date foundedDate)
+	{
 		this.foundedDate = foundedDate;
 	}
 
-	public void setHeadquarters(Location headquarters) {
+	public void setHeadquarters(Location headquarters)
+	{
 		this.headquarters = headquarters;
 	}
 
-	public void setModels(List<Model> models) {
+	public void setModels(List<Model> models)
+	{
 		this.models = models;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 }

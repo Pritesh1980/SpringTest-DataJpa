@@ -22,11 +22,11 @@ import com.guitar.db.model.Model;
 public class ModelRepository
 {
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager	   entityManager;
 
 	@Autowired
 	private ModelJpaRepository modelJpaRepository;
-	
+
 	/**
 	 * Create
 	 */
@@ -65,7 +65,9 @@ public class ModelRepository
 	public List<Model> getModelsInPriceRange(BigDecimal lowest,
 			BigDecimal highest)
 	{
-		return modelJpaRepository.findByPriceGreaterThanEqualAndPriceLessThanEqual(lowest, highest);
+		return modelJpaRepository
+				.findByPriceGreaterThanEqualAndPriceLessThanEqual(lowest,
+						highest);
 	}
 
 	/**
@@ -76,7 +78,8 @@ public class ModelRepository
 	{
 		Sort sort = new Sort(Direction.ASC, "name");
 		Pageable page = new PageRequest(0, 2, sort);
-		return modelJpaRepository.queryByPriceRangeAndWoodType(lowest, highest, "%" + wood +"%", page);
+		return modelJpaRepository.queryByPriceRangeAndWoodType(lowest, highest,
+				"%" + wood + "%", page);
 	}
 
 	/**

@@ -27,11 +27,10 @@ public class LocationPersistenceTests
 {
 	@Autowired
 	private LocationJpaRepository locationJpaRepository;
-	
-	@PersistenceContext
-	private EntityManager entityManager;
 
-	
+	@PersistenceContext
+	private EntityManager		  entityManager;
+
 	@Test
 	public void testJpaFind()
 	{
@@ -44,17 +43,18 @@ public class LocationPersistenceTests
 	{
 		List<Location> locations = locationJpaRepository.findByStateNot("Utah");
 		assertNotNull(locations);
-		assertNotSame("Utah", locations.get(0).getState() );
+		assertNotSame("Utah", locations.get(0).getState());
 	}
 
 	@Test
 	public void testJpaOr()
 	{
-		List<Location> locations = locationJpaRepository.findByStateIsOrCountryEquals("Utah", "Utah");
+		List<Location> locations = locationJpaRepository
+				.findByStateIsOrCountryEquals("Utah", "Utah");
 		assertNotNull(locations);
-		assertEquals("Utah", locations.get(0).getState() );
+		assertEquals("Utah", locations.get(0).getState());
 	}
-	
+
 	@Test
 	@Transactional
 	public void testSaveAndGetAndDelete() throws Exception
@@ -70,7 +70,8 @@ public class LocationPersistenceTests
 		// prod code
 		entityManager.clear();
 
-		Location otherLocation = locationJpaRepository.findOne(location.getId());
+		Location otherLocation = locationJpaRepository
+				.findOne(location.getId());
 		assertEquals("Canada", otherLocation.getCountry());
 		assertEquals("British Columbia", otherLocation.getState());
 
@@ -87,7 +88,7 @@ public class LocationPersistenceTests
 
 	@Test
 	@Transactional // note this is needed because we will get a lazy load
-					// exception unless we are in a tx
+				   // exception unless we are in a tx
 	public void testFindWithChildren() throws Exception
 	{
 		Location arizona = locationJpaRepository.findOne(3L);

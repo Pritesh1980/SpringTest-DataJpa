@@ -15,21 +15,25 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-public class JpaConfiguration {
+public class JpaConfiguration
+{
 
 	@Value("#{dataSource}")
 	private javax.sql.DataSource dataSource;
 
 	@Bean
-	public Map<String, Object> jpaProperties() {
+	public Map<String, Object> jpaProperties()
+	{
 		Map<String, Object> props = new HashMap<String, Object>();
 		props.put("hibernate.dialect", H2Dialect.class.getName());
-//		props.put("hibernate.cache.provider_class", HashtableCacheProvider.class.getName());
+		// props.put("hibernate.cache.provider_class",
+		// HashtableCacheProvider.class.getName());
 		return props;
 	}
 
 	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
+	public JpaVendorAdapter jpaVendorAdapter()
+	{
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(true);
 		hibernateJpaVendorAdapter.setGenerateDdl(true);
@@ -38,12 +42,14 @@ public class JpaConfiguration {
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager() {
-		return new JpaTransactionManager( entityManagerFactory().getObject() );
+	public PlatformTransactionManager transactionManager()
+	{
+		return new JpaTransactionManager(entityManagerFactory().getObject());
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory()
+	{
 		LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
 		lef.setDataSource(this.dataSource);
 		lef.setJpaPropertyMap(this.jpaProperties());

@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 import com.guitar.db.model.Manufacturer;
 
 @Repository
-public interface ManufacturerJpaRepository extends JpaRepository<Manufacturer, Long>
+public interface ManufacturerJpaRepository
+		extends JpaRepository<Manufacturer, Long>
 {
 	List<Manufacturer> findByFoundedDateBefore(Date date);
-	
+
 	List<Manufacturer> findByActiveTrue();
-	
+
 	List<Manufacturer> findByActiveFalse();
-	
+
 	List<Manufacturer> getAllThatSellAcoustics(String name);
 }

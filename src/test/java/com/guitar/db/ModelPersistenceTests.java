@@ -29,13 +29,13 @@ import com.guitar.db.repository.ModelRepository;
 public class ModelPersistenceTests
 {
 	@Autowired
-	private ModelRepository	modelRepository;
-	
+	private ModelRepository	   modelRepository;
+
 	@Autowired
 	private ModelJpaRepository modelJpaRepository;
 
 	@PersistenceContext
-	private EntityManager	entityManager;
+	private EntityManager	   entityManager;
 
 	@Test
 	@Transactional
@@ -61,7 +61,7 @@ public class ModelPersistenceTests
 
 		// delete BC location now
 		modelRepository.delete(otherModel);
-		
+
 		modelJpaRepository.customMethod();
 	}
 
@@ -95,9 +95,10 @@ public class ModelPersistenceTests
 		types.add("Electric");
 		types.add("Acoustic");
 		List<Model> mods = modelJpaRepository.findByModelTypeNameIn(types);
-		
-		mods.forEach((model)->{
-			assertTrue(model.getModelType().getName().equals("Electric") || model.getModelType().getName().equals("Acoustic"));
+
+		mods.forEach((model) -> {
+			assertTrue(model.getModelType().getName().equals("Electric")
+					|| model.getModelType().getName().equals("Acoustic"));
 		});
 	}
 }

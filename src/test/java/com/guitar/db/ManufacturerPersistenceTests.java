@@ -21,11 +21,11 @@ import com.guitar.db.repository.ManufacturerRepository;
 public class ManufacturerPersistenceTests
 {
 	@Autowired
-	private ManufacturerRepository manufacturerRepository;
+	private ManufacturerRepository	  manufacturerRepository;
 
 	@Autowired
 	private ManufacturerJpaRepository manufacturerJpaRepository;
-	
+
 	@Test
 	public void testGetManufacturersFoundedBeforeDate() throws Exception
 	{
@@ -38,12 +38,13 @@ public class ManufacturerPersistenceTests
 	public void testTrueFalse() throws Exception
 	{
 		List<Manufacturer> mans = manufacturerJpaRepository.findByActiveFalse();
-		assertEquals("Fender Musical Instruments Corporation", mans.get(0).getName());
-		
+		assertEquals("Fender Musical Instruments Corporation",
+				mans.get(0).getName());
+
 		mans = manufacturerJpaRepository.findByActiveTrue();
 		assertEquals("Gibson Guitar Corporation", mans.get(0).getName());
 	}
-	
+
 	@Test
 	public void testGetManufactureByName() throws Exception
 	{

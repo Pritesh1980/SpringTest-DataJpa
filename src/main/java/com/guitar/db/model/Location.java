@@ -12,43 +12,51 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Location {
+public class Location
+{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long			   id;
 
-	private String state;
-	private String country;
+	private String			   state;
+	private String			   country;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="LOCATION_ID")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "LOCATION_ID")
 	private List<Manufacturer> manufacturers = new ArrayList<Manufacturer>();
 
-	public String getState() {
+	public String getState()
+	{
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(String state)
+	{
 		this.state = state;
 	}
 
-	public String getCountry() {
+	public String getCountry()
+	{
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(String country)
+	{
 		this.country = country;
 	}
 
-	public List<Manufacturer> getManufacturers() {
+	public List<Manufacturer> getManufacturers()
+	{
 		return manufacturers;
 	}
 
-	public void setManufacturers(List<Manufacturer> manufacturers) {
+	public void setManufacturers(List<Manufacturer> manufacturers)
+	{
 		this.manufacturers = manufacturers;
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return id;
 	}
 

@@ -10,14 +10,16 @@ import org.springframework.stereotype.Repository;
 import com.guitar.db.model.Location;
 
 @Repository
-public class LocationRepository {
+public class LocationRepository
+{
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	/**
 	 * Create
 	 */
-	public Location create(Location loc) {
+	public Location create(Location loc)
+	{
 		entityManager.persist(loc);
 		entityManager.flush();
 		return loc;
@@ -26,7 +28,8 @@ public class LocationRepository {
 	/**
 	 * Update
 	 */
-	public Location update(Location loc) {
+	public Location update(Location loc)
+	{
 		loc = entityManager.merge(loc);
 		entityManager.flush();
 		return loc;
@@ -35,7 +38,8 @@ public class LocationRepository {
 	/**
 	 * Delete
 	 */
-	public void delete(Location loc) {
+	public void delete(Location loc)
+	{
 		entityManager.remove(loc);
 		entityManager.flush();
 	}
@@ -43,17 +47,20 @@ public class LocationRepository {
 	/**
 	 * Find
 	 */
-	public Location find(Long id) {
+	public Location find(Long id)
+	{
 		return entityManager.find(Location.class, id);
 	}
 
 	/**
 	 * Custom finder
 	 */
-	public List<Location> getLocationByStateName(String name) {
+	public List<Location> getLocationByStateName(String name)
+	{
 		@SuppressWarnings("unchecked")
 		List<Location> locs = entityManager
-				.createQuery("select l from Location l where l.state like :state")
+				.createQuery(
+						"select l from Location l where l.state like :state")
 				.setParameter("state", name + "%").getResultList();
 		return locs;
 	}

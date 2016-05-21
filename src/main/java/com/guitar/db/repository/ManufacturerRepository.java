@@ -15,11 +15,11 @@ import com.guitar.db.model.Manufacturer;
 public class ManufacturerRepository
 {
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager			  entityManager;
 
 	@Autowired
 	private ManufacturerJpaRepository manufacturerJpaRepository;
-	
+
 	/**
 	 * Create
 	 */
