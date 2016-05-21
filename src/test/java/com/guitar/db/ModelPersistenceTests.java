@@ -61,6 +61,8 @@ public class ModelPersistenceTests
 
 		// delete BC location now
 		modelRepository.delete(otherModel);
+		
+		modelJpaRepository.customMethod();
 	}
 
 	@Test
