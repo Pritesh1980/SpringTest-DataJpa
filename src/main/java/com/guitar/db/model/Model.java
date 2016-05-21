@@ -11,81 +11,97 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name="Model.findAllModelsByType", query="select m from Model m where m.modelType.name = :name")
-public class Model {
+@NamedQuery(name = "Model.findAllModelsByType", query = "select m from Model m where m.modelType.name = :name")
+public class Model
+{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long		 id;
 
-	private String name;	
-	private BigDecimal price;
-	private int frets;
-	private String woodType;
-	private Date yearFirstMade;
-	
+	private String		 name;
+	private BigDecimal	 price;
+	private int			 frets;
+	private String		 woodType;
+	private Date		 yearFirstMade;
+
 	@ManyToOne
 	private Manufacturer manufacturer;
 
 	@ManyToOne
-	private ModelType modelType;
+	private ModelType	 modelType;
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public BigDecimal getPrice()
+	{
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(BigDecimal price)
+	{
 		this.price = price;
 	}
 
-	public int getFrets() {
+	public int getFrets()
+	{
 		return frets;
 	}
 
-	public void setFrets(int frets) {
+	public void setFrets(int frets)
+	{
 		this.frets = frets;
 	}
 
-	public String getWoodType() {
+	public String getWoodType()
+	{
 		return woodType;
 	}
 
-	public void setWoodType(String woodType) {
+	public void setWoodType(String woodType)
+	{
 		this.woodType = woodType;
 	}
 
-	public Date getYearFirstMade() {
+	public Date getYearFirstMade()
+	{
 		return yearFirstMade;
 	}
 
-	public void setYearFirstMade(Date yearFirstMade) {
+	public void setYearFirstMade(Date yearFirstMade)
+	{
 		this.yearFirstMade = yearFirstMade;
 	}
 
-	public Manufacturer getManufacturer() {
+	public Manufacturer getManufacturer()
+	{
 		return manufacturer;
 	}
 
-	public void setManufacturer(Manufacturer manufacturer) {
+	public void setManufacturer(Manufacturer manufacturer)
+	{
 		this.manufacturer = manufacturer;
 	}
 
-	public ModelType getModelType() {
+	public ModelType getModelType()
+	{
 		return modelType;
 	}
 
-	public void setModelType(ModelType modelType) {
+	public void setModelType(ModelType modelType)
+	{
 		this.modelType = modelType;
 	}
 
-	public Long getId() {
+	public Long getId()
+	{
 		return id;
 	}
 }
