@@ -6,11 +6,13 @@ import static org.junit.Assert.assertNull;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,7 @@ public class ModelTypePersistenceTests
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Lock(LockModeType.PESSIMISTIC_WRITE) // These need to be in a transaction and need a @Version in the entity. Just doing it here to check syntax
 	@Test
 	@Transactional
 	public void testSaveAndGetAndDelete() throws Exception
